@@ -4,28 +4,27 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Doctor {
+public class Patient {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long doctor_id;
+    private Long patient_id;
 
     private String full_name;
 
     private String email;
 
-    private String speciality;
+    private String phone;
 
-    private LocalDateTime avaliable_from;
-
-    private LocalDateTime avaliable_to;
-
-    @OneToMany(mappedBy = "doctor")
+    @OneToMany(mappedBy = "patient")
     private List<Appointment> appointments;
+
+    @OneToMany(mappedBy = "medical_record")
+    private List<MedicalRecord> medical_records;
 
 }
