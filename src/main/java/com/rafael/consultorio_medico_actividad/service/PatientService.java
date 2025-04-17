@@ -10,6 +10,6 @@ public interface PatientService {
     List<PatientDTOResponse> getAllPatients();
     PatientDTOResponse getOnePatient(Long id);
     PatientDTOResponse registerAPatient(PatientRegisterDTORequest patient);
-    PatientDTOResponse updateAPatient(Long id);
+    PatientDTOResponse updateAPatient(Long id, PatientRegisterDTORequest data);
     void deleteAPatient(Long id);
 }

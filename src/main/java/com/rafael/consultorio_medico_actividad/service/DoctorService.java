@@ -10,5 +10,5 @@ public interface DoctorService {
     DoctorDTOResponse getOneDoctor(Long id);
     void deleteDoctor(Long id);
     DoctorDTOResponse registerADoctor(DoctorRegisterDTORequest doctor);
-    DoctorDTOResponse updateDoctor(Long id);
+    DoctorDTOResponse updateDoctor(Long id, DoctorRegisterDTORequest update_data);
 }
