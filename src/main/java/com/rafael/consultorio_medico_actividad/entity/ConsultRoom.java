@@ -10,7 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ConsultRoom {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long consult_room_id;

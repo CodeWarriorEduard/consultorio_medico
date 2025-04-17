@@ -19,7 +19,7 @@ public class Doctor {
 
     private String email;
 
-    private String speciality;
+    private String specialty;
 
     private LocalDateTime avaliable_from;
 
