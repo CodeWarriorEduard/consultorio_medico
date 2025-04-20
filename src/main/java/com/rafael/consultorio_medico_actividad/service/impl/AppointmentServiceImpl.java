@@ -7,8 +7,8 @@ import com.rafael.consultorio_medico_actividad.entity.ConsultRoom;
 import com.rafael.consultorio_medico_actividad.entity.Doctor;
 import com.rafael.consultorio_medico_actividad.entity.Patient;
 import com.rafael.consultorio_medico_actividad.enumeration.AppointmentStatus;
-import com.rafael.consultorio_medico_actividad.exception.ConsultRoomAlreadyBooked;
-import com.rafael.consultorio_medico_actividad.exception.ResourceNotFoundException;
+import com.rafael.consultorio_medico_actividad.exception.notFound.ConsultRoomAlreadyBooked;
+import com.rafael.consultorio_medico_actividad.exception.notFound.ResourceNotFoundException;
 import com.rafael.consultorio_medico_actividad.mapper.AppointmentMapper;
 import com.rafael.consultorio_medico_actividad.repository.AppointmentRepository;
 import com.rafael.consultorio_medico_actividad.repository.ConsultRoomRepository;
@@ -16,7 +16,6 @@ import com.rafael.consultorio_medico_actividad.repository.DoctorRepository;
 import com.rafael.consultorio_medico_actividad.repository.PatientRepository;
 import com.rafael.consultorio_medico_actividad.service.AppointmentService;
 
-import java.time.Duration;
 import java.util.List;
 
 public class AppointmentServiceImpl implements AppointmentService {

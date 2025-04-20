@@ -3,7 +3,7 @@ package com.rafael.consultorio_medico_actividad.service.impl;
 import com.rafael.consultorio_medico_actividad.dto.request.DoctorRegisterDTORequest;
 import com.rafael.consultorio_medico_actividad.dto.response.DoctorDTOResponse;
 import com.rafael.consultorio_medico_actividad.entity.Doctor;
-import com.rafael.consultorio_medico_actividad.exception.ResourceNotFoundException;
+import com.rafael.consultorio_medico_actividad.exception.notFound.ResourceNotFoundException;
 import com.rafael.consultorio_medico_actividad.mapper.DoctorMapper;
 import com.rafael.consultorio_medico_actividad.repository.DoctorRepository;
 import com.rafael.consultorio_medico_actividad.service.DoctorService;

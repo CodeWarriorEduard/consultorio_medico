@@ -4,7 +4,7 @@ import com.rafael.consultorio_medico_actividad.dto.request.MedicalRecordRegister
 import com.rafael.consultorio_medico_actividad.dto.response.MedicalRecordDTOResponse;
 import com.rafael.consultorio_medico_actividad.dto.update.MedicalRecordUpdateDTO;
 import com.rafael.consultorio_medico_actividad.entity.MedicalRecord;
-import com.rafael.consultorio_medico_actividad.exception.MedicalRecordNotFoundException;
+import com.rafael.consultorio_medico_actividad.exception.notFound.MedicalRecordNotFoundException;
 import com.rafael.consultorio_medico_actividad.mapper.MedicalRecordMapper;
 import com.rafael.consultorio_medico_actividad.repository.MedicalRecordRepository;
 import com.rafael.consultorio_medico_actividad.service.MedicalRecordService;
