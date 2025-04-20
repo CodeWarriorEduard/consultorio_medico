@@ -24,5 +24,5 @@ public class ConsultRoom {
     private String description;
 
     @OneToMany(mappedBy = "consult_room")
-    private List<ConsultRoom> consult_rooms;
+    private List<Appointment> appointments;
 }

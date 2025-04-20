@@ -10,5 +10,5 @@ public interface ConsultRoomService {
     ConsultRoomDTOResponse getOneConsultRoom(Long id);
     void deleteAConsultRoom(Long id);
     ConsultRoomDTOResponse registerAConsultRoom(ConsultRoomRegisterDTORequest consult_room);
-    ConsultRoomDTOResponse updateConsultRoom(Long id);
+    ConsultRoomDTOResponse updateConsultRoom(Long id, ConsultRoomRegisterDTORequest consult_room);
 }
