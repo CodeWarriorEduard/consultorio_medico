@@ -130,6 +130,7 @@ class PatientServiceImplTest {
     @Test
     void deleteAPatient() {
         when(patientRepository.findById(1L)).thenReturn(Optional.of(new Patient()));
+        doNothing().when(patientRepository).deleteById(1L);
         patientServiceImpl.deleteAPatient(1L);
         verify(patientRepository,times(1)).findById(1L);
     }

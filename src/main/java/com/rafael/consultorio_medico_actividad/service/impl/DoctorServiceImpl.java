@@ -3,7 +3,7 @@ package com.rafael.consultorio_medico_actividad.service.impl;
 import com.rafael.consultorio_medico_actividad.dto.request.DoctorRegisterDTORequest;
 import com.rafael.consultorio_medico_actividad.dto.response.DoctorDTOResponse;
 import com.rafael.consultorio_medico_actividad.entity.Doctor;
-import com.rafael.consultorio_medico_actividad.exception.notFound.ResourceNotFoundException;
+import com.rafael.consultorio_medico_actividad.exception.notFound.DoctorNotFoundException;
 import com.rafael.consultorio_medico_actividad.mapper.DoctorMapper;
 import com.rafael.consultorio_medico_actividad.repository.DoctorRepository;
 import com.rafael.consultorio_medico_actividad.service.DoctorService;
@@ -33,7 +33,7 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public DoctorDTOResponse getOneDoctor(Long id) {
         Doctor response = doctorRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("Doctor with id: "+ id + "not found"));
+                .orElseThrow(()-> new DoctorNotFoundException("Doctor with id: "+ id + "not found"));
 
         return doctorMapper.toDoctorDtoResponse(response);
     }
@@ -41,7 +41,7 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public void deleteDoctor(Long id) {
         Doctor response = doctorRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("Doctor with id: "+ id + "not found"));
+                .orElseThrow(()-> new DoctorNotFoundException("Doctor with id: "+ id + "not found"));
 
         // If exists delete
         doctorRepository.deleteById(response.getDoctor_id());
@@ -55,7 +55,7 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public DoctorDTOResponse updateDoctor(Long id, DoctorRegisterDTORequest update_data) {
         Doctor response = doctorRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("Doctor with id: "+ id + " not found"));
+                .orElseThrow(()-> new DoctorNotFoundException("Doctor with id: "+ id + " not found"));
 
         response.setFull_name(update_data.full_name());
         response.setEmail(update_data.email());

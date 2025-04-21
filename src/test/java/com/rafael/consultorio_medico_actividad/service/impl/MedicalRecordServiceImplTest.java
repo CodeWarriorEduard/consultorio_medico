@@ -94,6 +94,7 @@ class MedicalRecordServiceImplTest {
     void deleteMedicalRecord() {
 
         when(medicalRecordRepository.existsById(any())).thenReturn(true);
+        doNothing().when(medicalRecordRepository).deleteById(any());
         medicalRecordService.deleteMedicalRecord(1L);
         verify(medicalRecordRepository, times(1)).deleteById(any());
     }
@@ -155,6 +156,7 @@ class MedicalRecordServiceImplTest {
         mR1.setNotes("notes 2");
         when(medicalRecordRepository.save(mR1)).thenReturn(mR1);
         when(medicalRecordMapper.toMedicalRecordDTOResponse(mR1)).thenReturn(updateDTOResponse);
+        when(medicalRecordRepository.findById(any())).thenReturn(Optional.of(mR1));
         MedicalRecordDTOResponse response = medicalRecordService.updateAMedicalRecord(updateDTO,1L);
 
         assertEquals(updateDTOResponse.notes(), response.notes());

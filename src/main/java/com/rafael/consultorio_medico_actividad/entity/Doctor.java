@@ -2,6 +2,7 @@ package com.rafael.consultorio_medico_actividad.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
