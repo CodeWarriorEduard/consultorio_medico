@@ -9,7 +9,7 @@ import java.util.List;
 public interface MedicalRecordService {
     List<MedicalRecordDTOResponse> findAllMedicalRecord();
     MedicalRecordDTOResponse getOneMedicalRecord(Long id);
-    void deleteDoctor(Long id);
+    void deleteMedicalRecord(Long id);
     MedicalRecordDTOResponse registerAMedicalRecord(MedicalRecordRegisterDTORequest medical_record);
     MedicalRecordDTOResponse updateAMedicalRecord(MedicalRecordUpdateDTO medical_record, Long id);
 }
