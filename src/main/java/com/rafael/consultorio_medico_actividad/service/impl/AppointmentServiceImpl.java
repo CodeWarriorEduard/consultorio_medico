@@ -10,6 +10,7 @@ import com.rafael.consultorio_medico_actividad.enumeration.AppointmentStatus;
 import com.rafael.consultorio_medico_actividad.exception.DoctorAppointmentConflict;
 import com.rafael.consultorio_medico_actividad.exception.ConsultRoomAlreadyBooked;
 import com.rafael.consultorio_medico_actividad.exception.TimeConflictException;
+import com.rafael.consultorio_medico_actividad.exception.notFound.AppointMentNotFoundException;
 import com.rafael.consultorio_medico_actividad.exception.notFound.ResourceNotFoundException;
 import com.rafael.consultorio_medico_actividad.mapper.AppointmentMapper;
 import com.rafael.consultorio_medico_actividad.repository.AppointmentRepository;
@@ -41,17 +42,26 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public List<AppointmentDTOResponse> findAllAppointments() {
-        return List.of();
+        return appointmentRepository.findAll()
+                .stream()
+                .map(appointmentMapper::toAppointmentDtoResponse)
+                .toList();
     }
 
     @Override
     public AppointmentDTOResponse getOneAppointment(Long id) {
-        return null;
+        return appointmentRepository.findById(id)
+                .map(appointmentMapper::toAppointmentDtoResponse)
+                .orElseThrow(() -> new AppointMentNotFoundException("Appointment with id " + id + " not found"));
     }
 
     @Override
     public void deleteAppointment(Long id) {
 
+        if (!appointmentRepository.existsById(id)){
+            throw new AppointMentNotFoundException("Appointment with id " + id + " not found");
+        }
+        appointmentRepository.deleteById(id);
     }
 
     @Override
