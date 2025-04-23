@@ -63,7 +63,7 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
 
     @Override
     public List<MedicalRecordDTOResponse> findMedicalRecordByPatientId(Long id) {
-        return repository.findMedicalRecordByPatientPatient_id(id)
+        return repository.findMedicalRecordByPatientId(id)
                 .stream().map(mapper::toMedicalRecordDTOResponse)
                 .collect(Collectors.toList());
     }

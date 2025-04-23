@@ -28,7 +28,7 @@ public class Patient {
     @OneToMany(mappedBy = "patient")
     private List<Appointment> appointments;
 
-    @OneToMany(mappedBy = "medical_record")
+    @OneToMany(mappedBy = "patient")
     private List<MedicalRecord> medical_records;
 
 }

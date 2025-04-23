@@ -3,6 +3,7 @@ package com.rafael.consultorio_medico_actividad.controller;
 import com.rafael.consultorio_medico_actividad.dto.request.MedicalRecordRegisterDTORequest;
 import com.rafael.consultorio_medico_actividad.dto.response.MedicalRecordDTOResponse;
 import com.rafael.consultorio_medico_actividad.service.MedicalRecordService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ public class MedicalRecordController {
 
     private final MedicalRecordService medicalRecordService;
 
+    @Autowired
     public MedicalRecordController(MedicalRecordService medicalRecordService) {
         this.medicalRecordService = medicalRecordService;
     }

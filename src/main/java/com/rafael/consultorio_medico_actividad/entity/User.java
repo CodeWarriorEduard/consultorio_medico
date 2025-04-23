@@ -1,20 +1,23 @@
 package com.rafael.consultorio_medico_actividad.entity;
 
-import com.rafael.consultorio_medico_actividad.enumeration.RolesEnum;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Collections;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+@Table(name = "users")
+public class User implements UserDetails {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;
 
     private String full_name;
@@ -23,10 +26,18 @@ public class User {
 
     private String password;
 
-    @ManyToOne()
-    @JoinColumn(
-            name = "role_id", referencedColumnName = "role_id"
-    )
+    @ManyToOne
+    @JoinColumn(name = "role_id", referencedColumnName = "role_id")
     private Roles role;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singleton(new SimpleGrantedAuthority(role.getRole().name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
 
 }

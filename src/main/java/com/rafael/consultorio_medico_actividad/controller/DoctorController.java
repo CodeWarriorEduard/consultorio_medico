@@ -1,6 +1,7 @@
 package com.rafael.consultorio_medico_actividad.controller;
 
 import com.rafael.consultorio_medico_actividad.dto.request.DoctorRegisterDTORequest;
+import com.rafael.consultorio_medico_actividad.dto.request.DoctorUserRegisterDTORequest;
 import com.rafael.consultorio_medico_actividad.dto.response.DoctorDTOResponse;
 import com.rafael.consultorio_medico_actividad.service.DoctorService;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,7 @@ public class DoctorController {
     }
 
     @PostMapping("/new")
-    private ResponseEntity<DoctorDTOResponse> createDoctor(@RequestBody DoctorRegisterDTORequest doctor) {
+    private ResponseEntity<DoctorDTOResponse> createDoctor(@RequestBody DoctorUserRegisterDTORequest doctor) {
         return new ResponseEntity<>(doctorService.registerADoctor(doctor), HttpStatus.CREATED);
     }
 

@@ -15,6 +15,7 @@ import java.util.List;
 public class Roles {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long role_id;
 
     private RolesEnum role;

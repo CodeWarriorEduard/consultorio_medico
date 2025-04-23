@@ -10,6 +10,7 @@ import com.rafael.consultorio_medico_actividad.enumeration.AppointmentStatus;
 import com.rafael.consultorio_medico_actividad.exception.DoctorAppointmentConflict;
 import com.rafael.consultorio_medico_actividad.exception.ConsultRoomAlreadyBooked;
 import com.rafael.consultorio_medico_actividad.exception.TimeConflictException;
+import com.rafael.consultorio_medico_actividad.exception.notFound.AppointMentNotFoundException;
 import com.rafael.consultorio_medico_actividad.exception.notFound.ResourceNotFoundException;
 import com.rafael.consultorio_medico_actividad.mapper.AppointmentMapper;
 import com.rafael.consultorio_medico_actividad.repository.AppointmentRepository;
@@ -17,6 +18,7 @@ import com.rafael.consultorio_medico_actividad.repository.ConsultRoomRepository;
 import com.rafael.consultorio_medico_actividad.repository.DoctorRepository;
 import com.rafael.consultorio_medico_actividad.repository.PatientRepository;
 import com.rafael.consultorio_medico_actividad.service.AppointmentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -31,6 +33,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentMapper appointmentMapper;
     private final DoctorRepository doctorRepository;
 
+    @Autowired
     public AppointmentServiceImpl(AppointmentRepository appointmentRepository, PatientRepository patientRepository, ConsultRoomRepository consultRoomRepository, AppointmentMapper appointmentMapper, DoctorRepository doctorRepository) {
         this.appointmentRepository = appointmentRepository;
         this.patientRepository = patientRepository;
@@ -99,5 +102,14 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public AppointmentDTOResponse updateAppointment(Long id) {
         return null;
+    }
+
+    @Override
+    public AppointmentDTOResponse updateAppointmentStatus(Long id, AppointmentStatus status) {
+        Appointment appointment = appointmentRepository.findById(id)
+                .orElseThrow(() -> new AppointMentNotFoundException("Appointment not found"));
+
+        appointment.setAppointmentStatus(status);
+        return appointmentMapper.toAppointmentDtoResponse(appointmentRepository.save(appointment));
     }
 }
