@@ -7,7 +7,9 @@ import com.rafael.consultorio_medico_actividad.entity.ConsultRoom;
 import com.rafael.consultorio_medico_actividad.entity.Doctor;
 import com.rafael.consultorio_medico_actividad.entity.Patient;
 import com.rafael.consultorio_medico_actividad.enumeration.AppointmentStatus;
-import com.rafael.consultorio_medico_actividad.exception.notFound.ConsultRoomAlreadyBooked;
+import com.rafael.consultorio_medico_actividad.exception.DoctorAppointmentConflict;
+import com.rafael.consultorio_medico_actividad.exception.ConsultRoomAlreadyBooked;
+import com.rafael.consultorio_medico_actividad.exception.TimeConflictException;
 import com.rafael.consultorio_medico_actividad.exception.notFound.ResourceNotFoundException;
 import com.rafael.consultorio_medico_actividad.mapper.AppointmentMapper;
 import com.rafael.consultorio_medico_actividad.repository.AppointmentRepository;
@@ -15,9 +17,12 @@ import com.rafael.consultorio_medico_actividad.repository.ConsultRoomRepository;
 import com.rafael.consultorio_medico_actividad.repository.DoctorRepository;
 import com.rafael.consultorio_medico_actividad.repository.PatientRepository;
 import com.rafael.consultorio_medico_actividad.service.AppointmentService;
+import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
 public class AppointmentServiceImpl implements AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
@@ -65,10 +70,18 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         // Looking for conflicts
 
-        List<Appointment> conflicts = appointmentRepository.findConflict(consultRoom.getConsult_room_id(), appointment.start_time(), appointment.end_time());
+        if(appointment.start_time().isBefore(LocalDateTime.now()) || appointment.end_time().isBefore(appointment.start_time())){
+            throw new TimeConflictException("Appointment time is wrong");
+        }
+
+        List<Appointment> conflicts = appointmentRepository.findConflict(consultRoom.getConsult_room_id() ,appointment.start_time(), appointment.end_time());
 
         if(!conflicts.isEmpty()){
             throw new ConsultRoomAlreadyBooked("Consult room is already booked!");
+        }
+
+        if(appointment.start_time().isAfter(appointment.end_time())){
+            throw new DoctorAppointmentConflict("The appointment start time is out of the doctor work schedule");
         }
 
 

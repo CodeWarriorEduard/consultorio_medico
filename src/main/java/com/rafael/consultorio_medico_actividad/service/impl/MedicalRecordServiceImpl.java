@@ -10,9 +10,12 @@ import com.rafael.consultorio_medico_actividad.mapper.MedicalRecordMapper;
 import com.rafael.consultorio_medico_actividad.repository.AppointmentRepository;
 import com.rafael.consultorio_medico_actividad.repository.MedicalRecordRepository;
 import com.rafael.consultorio_medico_actividad.service.MedicalRecordService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+@Service
 public class MedicalRecordServiceImpl implements MedicalRecordService {
 
     private final MedicalRecordRepository repository;
@@ -59,15 +62,9 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     }
 
     @Override
-    public MedicalRecordDTOResponse updateAMedicalRecord(MedicalRecordUpdateDTO medical_record, Long id) {
-        if (!repository.existsById(id)) {
-            throw new MedicalRecordNotFoundException("Medical record with id " + id + " not found");
-        }
-
-        MedicalRecord response = repository.findById(id).get();
-        response.setDiagnosis(medical_record.diagnosis());
-        response.setNotes(medical_record.notes());
-
-        return mapper.toMedicalRecordDTOResponse(repository.save(response));
+    public List<MedicalRecordDTOResponse> findMedicalRecordByPatientId(Long id) {
+        return repository.findMedicalRecordByPatientPatient_id(id)
+                .stream().map(mapper::toMedicalRecordDTOResponse)
+                .collect(Collectors.toList());
     }
 }

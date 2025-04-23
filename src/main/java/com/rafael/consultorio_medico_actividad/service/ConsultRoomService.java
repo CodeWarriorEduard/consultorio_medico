@@ -5,6 +5,7 @@ import com.rafael.consultorio_medico_actividad.dto.response.ConsultRoomDTORespon
 
 import java.util.List;
 
+
 public interface ConsultRoomService {
     List<ConsultRoomDTOResponse> findAllConsultRooms();
     ConsultRoomDTOResponse getOneConsultRoom(Long id);

@@ -4,6 +4,7 @@ import com.rafael.consultorio_medico_actividad.dto.request.AppointmentRegisterDT
 import com.rafael.consultorio_medico_actividad.dto.response.AppointmentDTOResponse;
 import java.util.List;
 
+
 public interface AppointmentService {
     List<AppointmentDTOResponse> findAllAppointments();
     AppointmentDTOResponse getOneAppointment(Long id);

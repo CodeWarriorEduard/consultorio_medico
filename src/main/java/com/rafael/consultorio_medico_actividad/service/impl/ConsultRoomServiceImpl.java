@@ -7,9 +7,11 @@ import com.rafael.consultorio_medico_actividad.exception.notFound.ConsultRoomNot
 import com.rafael.consultorio_medico_actividad.mapper.ConsultRoomMapper;
 import com.rafael.consultorio_medico_actividad.repository.ConsultRoomRepository;
 import com.rafael.consultorio_medico_actividad.service.ConsultRoomService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ConsultRoomServiceImpl implements ConsultRoomService {
 
     private final ConsultRoomRepository consultRoomRepository;
