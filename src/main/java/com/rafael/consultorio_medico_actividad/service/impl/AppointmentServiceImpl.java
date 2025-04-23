@@ -2,6 +2,7 @@ package com.rafael.consultorio_medico_actividad.service.impl;
 
 import com.rafael.consultorio_medico_actividad.dto.request.AppointmentRegisterDTORequest;
 import com.rafael.consultorio_medico_actividad.dto.response.AppointmentDTOResponse;
+import com.rafael.consultorio_medico_actividad.dto.update.AppointmentDTOUpdate;
 import com.rafael.consultorio_medico_actividad.entity.Appointment;
 import com.rafael.consultorio_medico_actividad.entity.ConsultRoom;
 import com.rafael.consultorio_medico_actividad.entity.Doctor;
@@ -58,7 +59,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public void deleteAppointment(Long id) {
 
-        if (!appointmentRepository.existsById(id)){
+        if (!appointmentRepository.existsById(id)) {
             throw new AppointMentNotFoundException("Appointment with id " + id + " not found");
         }
         appointmentRepository.deleteById(id);
@@ -80,17 +81,17 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         // Looking for conflicts
 
-        if(appointment.start_time().isBefore(LocalDateTime.now()) || appointment.end_time().isBefore(appointment.start_time())){
+        if (appointment.start_time().isBefore(LocalDateTime.now()) || appointment.end_time().isBefore(appointment.start_time())) {
             throw new TimeConflictException("Appointment time is wrong");
         }
 
-        List<Appointment> conflicts = appointmentRepository.findConflict(consultRoom.getConsult_room_id() ,appointment.start_time(), appointment.end_time());
+        List<Appointment> conflicts = appointmentRepository.findConflict(consultRoom.getConsult_room_id(), appointment.start_time(), appointment.end_time());
 
-        if(!conflicts.isEmpty()){
+        if (!conflicts.isEmpty()) {
             throw new ConsultRoomAlreadyBooked("Consult room is already booked!");
         }
 
-        if(appointment.start_time().isAfter(appointment.end_time())){
+        if (appointment.start_time().isAfter(doctor.getAvaliable_to())) {
             throw new DoctorAppointmentConflict("The appointment start time is out of the doctor work schedule");
         }
 
@@ -107,7 +108,21 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public AppointmentDTOResponse updateAppointment(Long id) {
-        return null;
+    public AppointmentDTOResponse updateAppointment(Long id, AppointmentDTOUpdate appointment) {
+
+        Appointment toUpdate = appointmentRepository.findById(id).orElseThrow(() -> new AppointMentNotFoundException("Appointment with id " + id + " not found"));
+
+        if (appointment.start_time().isBefore(LocalDateTime.now()) || appointment.end_time().isBefore(appointment.start_time())) {
+            throw new TimeConflictException("Appointment time is wrong");
+        } else if (appointment.start_time().isBefore(LocalDateTime.now()) || appointment.end_time().isBefore(appointment.start_time())) {
+            throw new TimeConflictException("Appointment time is wrong");
+        }
+
+        toUpdate.setStart_time(appointment.start_time());
+        toUpdate.setEnd_time(appointment.end_time());
+        toUpdate.setAppointmentStatus(appointment.status());
+
+        return appointmentMapper.toAppointmentDtoResponse(appointmentRepository.save(toUpdate));
+
     }
 }
