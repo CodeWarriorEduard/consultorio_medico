@@ -1,24 +1,7 @@
 package com.rafael.consultorio_medico_actividad.service.impl;
 
-import com.rafael.consultorio_medico_actividad.dto.request.DoctorRegisterDTORequest;
-import com.rafael.consultorio_medico_actividad.dto.response.DoctorDTOResponse;
-import com.rafael.consultorio_medico_actividad.entity.Doctor;
-import com.rafael.consultorio_medico_actividad.exception.notFound.DoctorNotFoundException;
-import com.rafael.consultorio_medico_actividad.mapper.DoctorMapper;
-import com.rafael.consultorio_medico_actividad.repository.DoctorRepository;
-import com.rafael.consultorio_medico_actividad.repository.MedicalRecordRepository;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class DoctorServiceImplTest {

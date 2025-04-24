@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public enum RolesEnum {
 
-    DOCTOR("DOCTOR"), ADMIN("ADMIN");
+    DOCTOR("ROLE_DOCTOR"), ADMIN("ROLE_ADMIN");
 
     private final String role;
 

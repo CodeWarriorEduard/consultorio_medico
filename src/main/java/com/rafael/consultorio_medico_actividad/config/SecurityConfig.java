@@ -35,6 +35,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authRequest ->
                         authRequest
                                 .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/appointment/id/new-status", "/records/**").hasAnyAuthority("DOCTOR", "ADMIN")
+                                .requestMatchers("/appointment/**", "/patient/**", "/doctor/**").hasAuthority("ADMIN")
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session

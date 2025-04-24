@@ -22,9 +22,7 @@ public class Doctor{
     private Long doctor_id;
 
     // Doctor will be an user, so we remove them and let the user entity provide them.
-    //    private String full_name;
-    //
-    //    private String email;
+    private String full_name;
 
     private String specialty;
 
@@ -32,7 +30,7 @@ public class Doctor{
 
     private LocalDateTime avaliable_to;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 

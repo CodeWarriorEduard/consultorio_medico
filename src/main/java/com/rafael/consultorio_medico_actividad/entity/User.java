@@ -20,8 +20,6 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;
 
-    private String full_name;
-
     private String email;
 
     private String password;

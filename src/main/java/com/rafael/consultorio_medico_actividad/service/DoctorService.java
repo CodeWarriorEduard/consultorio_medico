@@ -1,6 +1,6 @@
 package com.rafael.consultorio_medico_actividad.service;
 
-import com.rafael.consultorio_medico_actividad.dto.request.DoctorRegisterDTORequest;
+import com.rafael.consultorio_medico_actividad.dto.request.DoctorUpdateDTORequest;
 import com.rafael.consultorio_medico_actividad.dto.request.DoctorUserRegisterDTORequest;
 import com.rafael.consultorio_medico_actividad.dto.response.DoctorDTOResponse;
 
@@ -11,5 +11,5 @@ public interface DoctorService {
     DoctorDTOResponse getOneDoctor(Long id);
     void deleteDoctor(Long id);
     DoctorDTOResponse registerADoctor(DoctorUserRegisterDTORequest doctor);
-    DoctorDTOResponse updateDoctor(Long id, DoctorRegisterDTORequest update_data);
+    DoctorDTOResponse updateDoctor(Long id, DoctorUpdateDTORequest update_data);
 }

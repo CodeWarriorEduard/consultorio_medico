@@ -96,7 +96,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointment_n.setEnd_time(appointment.end_time());
         appointment_n.setAppointmentStatus(AppointmentStatus.SCHEDULED);
 
-        return appointmentMapper.toAppointmentDtoResponse(appointment_n);
+        return appointmentMapper.toAppointmentDtoResponse(appointmentRepository.save(appointment_n));
     }
 
     @Override
