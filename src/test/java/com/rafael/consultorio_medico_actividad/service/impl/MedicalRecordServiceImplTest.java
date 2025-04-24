@@ -163,7 +163,7 @@ class MedicalRecordServiceImplTest {
 //        verify(medicalRecordRepository, times(1)).save(mR1);
 //
 //    }
-
+//
 //    @Test
 //    void whenRegisterOneMedicalRecordAndNotFoundThenThrowException() {
 //        MedicalRecordUpdateDTO updateDTO = new MedicalRecordUpdateDTO("diagnosis 1", "notes 2");

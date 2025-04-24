@@ -13,21 +13,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Roles {
-
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long role_id;
 
     private RolesEnum role;
 
     @OneToMany(mappedBy = "role")
     private List<User> users;
-
-    @ManyToMany
-    @JoinTable(
-            name = "role_privilege",
-            joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "privilege_id", referencedColumnName = "privilege_id")
-    )
-    private List<Privilege> privileges;
-
 }

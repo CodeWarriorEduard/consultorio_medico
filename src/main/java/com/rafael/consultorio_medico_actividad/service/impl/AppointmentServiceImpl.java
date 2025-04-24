@@ -17,7 +17,8 @@ import com.rafael.consultorio_medico_actividad.repository.AppointmentRepository;
 import com.rafael.consultorio_medico_actividad.repository.ConsultRoomRepository;
 import com.rafael.consultorio_medico_actividad.repository.DoctorRepository;
 import com.rafael.consultorio_medico_actividad.repository.PatientRepository;
-import com.rafael.consultorio_medico_actividad.service.AppointmentService;
+import com.rafael.consultorio_medico_actividad.service.interfaces.AppointmentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -32,6 +33,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentMapper appointmentMapper;
     private final DoctorRepository doctorRepository;
 
+    @Autowired
     public AppointmentServiceImpl(AppointmentRepository appointmentRepository, PatientRepository patientRepository, ConsultRoomRepository consultRoomRepository, AppointmentMapper appointmentMapper, DoctorRepository doctorRepository) {
         this.appointmentRepository = appointmentRepository;
         this.patientRepository = patientRepository;
@@ -130,4 +132,5 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentMapper.toAppointmentDtoResponse(appointmentRepository.save(toUpdate));
 
     }
+
 }

@@ -6,7 +6,7 @@ import com.rafael.consultorio_medico_actividad.entity.Patient;
 import com.rafael.consultorio_medico_actividad.exception.notFound.PatientNotFoundException;
 import com.rafael.consultorio_medico_actividad.mapper.PatientMapper;
 import com.rafael.consultorio_medico_actividad.repository.PatientRepository;
-import com.rafael.consultorio_medico_actividad.service.PatientService;
+import com.rafael.consultorio_medico_actividad.service.interfaces.PatientService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
