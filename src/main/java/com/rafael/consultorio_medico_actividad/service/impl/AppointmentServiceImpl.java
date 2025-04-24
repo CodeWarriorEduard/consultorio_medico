@@ -8,11 +8,10 @@ import com.rafael.consultorio_medico_actividad.entity.ConsultRoom;
 import com.rafael.consultorio_medico_actividad.entity.Doctor;
 import com.rafael.consultorio_medico_actividad.entity.Patient;
 import com.rafael.consultorio_medico_actividad.enumeration.AppointmentStatus;
-import com.rafael.consultorio_medico_actividad.exception.DoctorAppointmentConflict;
+import com.rafael.consultorio_medico_actividad.exception.DoctorAppointmentConflictException;
 import com.rafael.consultorio_medico_actividad.exception.ConsultRoomAlreadyBooked;
 import com.rafael.consultorio_medico_actividad.exception.TimeConflictException;
-import com.rafael.consultorio_medico_actividad.exception.notFound.AppointMentNotFoundException;
-import com.rafael.consultorio_medico_actividad.exception.notFound.ResourceNotFoundException;
+import com.rafael.consultorio_medico_actividad.exception.notFound.*;
 import com.rafael.consultorio_medico_actividad.mapper.AppointmentMapper;
 import com.rafael.consultorio_medico_actividad.repository.AppointmentRepository;
 import com.rafael.consultorio_medico_actividad.repository.ConsultRoomRepository;
@@ -69,19 +68,19 @@ public class AppointmentServiceImpl implements AppointmentService {
     public AppointmentDTOResponse createAnAppointment(AppointmentRegisterDTORequest appointment) {
 
         Patient patient = patientRepository.findById(appointment.patient_id())
-                .orElseThrow(() -> new ResourceNotFoundException("Pacient not found"));
+                .orElseThrow(() -> new PatientNotFoundException("Pacient not found"));
 
 
         ConsultRoom consultRoom = consultRoomRepository.findById(appointment.consult_room_id())
-                .orElseThrow(() -> new ResourceNotFoundException("Consult room not found"));
+                .orElseThrow(() -> new ConsultRoomNotFoundException("Consult room not found"));
 
 
         Doctor doctor = doctorRepository.findById(appointment.doctor_id())
-                .orElseThrow(() -> new ResourceNotFoundException("Doctor not found"));
+                .orElseThrow(() -> new DoctorNotFoundException("Doctor not found"));
 
         // Looking for conflicts
 
-        if (appointment.start_time().isBefore(LocalDateTime.now()) || appointment.end_time().isBefore(appointment.start_time())) {
+        if (appointment.start_time().isBefore(LocalDateTime.now().plusHours(1)) || appointment.end_time().isBefore(appointment.start_time())) {
             throw new TimeConflictException("Appointment time is wrong");
         }
 
@@ -91,10 +90,9 @@ public class AppointmentServiceImpl implements AppointmentService {
             throw new ConsultRoomAlreadyBooked("Consult room is already booked!");
         }
 
-        if (appointment.start_time().isAfter(doctor.getAvaliable_to())) {
-            throw new DoctorAppointmentConflict("The appointment start time is out of the doctor work schedule");
+        if (appointment.start_time().toLocalTime().isAfter(doctor.getAvaliable_to()) || appointment.end_time().toLocalTime().isAfter(doctor.getAvaliable_to()) || appointment.start_time().toLocalTime().isBefore(doctor.getAvaliable_from())) {
+            throw new DoctorAppointmentConflictException("The appointment time is out of the doctor work schedule");
         }
-
 
         Appointment appointment_n = appointmentMapper.toAppointment(appointment);
         appointment_n.setDoctor(doctor);
@@ -104,7 +102,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointment_n.setEnd_time(appointment.end_time());
         appointment_n.setAppointmentStatus(AppointmentStatus.SCHEDULED);
 
-        return appointmentMapper.toAppointmentDtoResponse(appointment_n);
+        return appointmentMapper.toAppointmentDtoResponse(appointmentRepository.save(appointment_n));
     }
 
     @Override
@@ -112,10 +110,17 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         Appointment toUpdate = appointmentRepository.findById(id).orElseThrow(() -> new AppointMentNotFoundException("Appointment with id " + id + " not found"));
 
-        if (appointment.start_time().isBefore(LocalDateTime.now()) || appointment.end_time().isBefore(appointment.start_time())) {
+        List<Appointment> conflicts = appointmentRepository.findConflict(toUpdate.getConsult_room().getConsult_room_id(), appointment.start_time(), appointment.end_time());
+
+        if (appointment.start_time().isBefore(LocalDateTime.now().plusHours(1)) || appointment.end_time().isBefore(appointment.start_time())) {
             throw new TimeConflictException("Appointment time is wrong");
-        } else if (appointment.start_time().isBefore(LocalDateTime.now()) || appointment.end_time().isBefore(appointment.start_time())) {
-            throw new TimeConflictException("Appointment time is wrong");
+        } else if (appointment.start_time().toLocalTime().isAfter(toUpdate.getDoctor().getAvaliable_to())
+        || appointment.end_time().toLocalTime().isAfter(toUpdate.getDoctor().getAvaliable_to()) || appointment.start_time().toLocalTime().isBefore(toUpdate.getDoctor().getAvaliable_from())) {
+            throw new DoctorAppointmentConflictException("The appointment time is out of the doctor work schedule");
+        } else if(toUpdate.getAppointmentStatus() != AppointmentStatus.SCHEDULED) {
+            throw new TimeConflictException("The appointment is not updateable");
+        } else if (!conflicts.isEmpty()) {
+            throw new ConsultRoomAlreadyBooked("Consult room is already booked!");
         }
 
         toUpdate.setStart_time(appointment.start_time());

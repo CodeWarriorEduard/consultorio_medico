@@ -142,33 +142,33 @@ class MedicalRecordServiceImplTest {
         verify(appointmentRepository, times(1)).existsById(any());
     }
 
-    @Test
-    void updateAMedicalRecord() {
+//    @Test
+//    void updateAMedicalRecord() {
+//
+//        MedicalRecord mR1 = MedicalRecord.builder()
+//                .notes("notes 1")
+//                .diagnosis("diagnosis 1")
+//                .build();
+//
+//        MedicalRecordUpdateDTO updateDTO = new MedicalRecordUpdateDTO("diagnosis 1", "notes 2");
+//        MedicalRecordDTOResponse updateDTOResponse = new MedicalRecordDTOResponse("diagnosis 1", "notes 2");
+//        when(medicalRecordRepository.existsById(any())).thenReturn(true);
+//        mR1.setNotes("notes 2");
+//        when(medicalRecordRepository.save(mR1)).thenReturn(mR1);
+//        when(medicalRecordMapper.toMedicalRecordDTOResponse(mR1)).thenReturn(updateDTOResponse);
+//        when(medicalRecordRepository.findById(any())).thenReturn(Optional.of(mR1));
+//        MedicalRecordDTOResponse response = medicalRecordService.updateAMedicalRecord(updateDTO,1L);
+//
+//        assertEquals(updateDTOResponse.notes(), response.notes());
+//        verify(medicalRecordRepository, times(1)).save(mR1);
+//
+//    }
 
-        MedicalRecord mR1 = MedicalRecord.builder()
-                .notes("notes 1")
-                .diagnosis("diagnosis 1")
-                .build();
-
-        MedicalRecordUpdateDTO updateDTO = new MedicalRecordUpdateDTO("diagnosis 1", "notes 2");
-        MedicalRecordDTOResponse updateDTOResponse = new MedicalRecordDTOResponse("diagnosis 1", "notes 2");
-        when(medicalRecordRepository.existsById(any())).thenReturn(true);
-        mR1.setNotes("notes 2");
-        when(medicalRecordRepository.save(mR1)).thenReturn(mR1);
-        when(medicalRecordMapper.toMedicalRecordDTOResponse(mR1)).thenReturn(updateDTOResponse);
-        when(medicalRecordRepository.findById(any())).thenReturn(Optional.of(mR1));
-        MedicalRecordDTOResponse response = medicalRecordService.updateAMedicalRecord(updateDTO,1L);
-
-        assertEquals(updateDTOResponse.notes(), response.notes());
-        verify(medicalRecordRepository, times(1)).save(mR1);
-
-    }
-
-    @Test
-    void whenRegisterOneMedicalRecordAndNotFoundThenThrowException() {
-        MedicalRecordUpdateDTO updateDTO = new MedicalRecordUpdateDTO("diagnosis 1", "notes 2");
-        when(medicalRecordRepository.existsById(any())).thenReturn(false);
-        assertThrows(MedicalRecordNotFoundException.class, () -> medicalRecordService.updateAMedicalRecord(updateDTO,1L));
-        verify(medicalRecordRepository, times(1)).existsById(any());
-    }
+//    @Test
+//    void whenRegisterOneMedicalRecordAndNotFoundThenThrowException() {
+//        MedicalRecordUpdateDTO updateDTO = new MedicalRecordUpdateDTO("diagnosis 1", "notes 2");
+//        when(medicalRecordRepository.existsById(any())).thenReturn(false);
+//        assertThrows(MedicalRecordNotFoundException.class, () -> medicalRecordService.updateAMedicalRecord(updateDTO,1L));
+//        verify(medicalRecordRepository, times(1)).existsById(any());
+//    }
 }

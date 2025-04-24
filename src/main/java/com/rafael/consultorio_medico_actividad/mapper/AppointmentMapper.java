@@ -4,10 +4,12 @@ import com.rafael.consultorio_medico_actividad.dto.request.AppointmentRegisterDT
 import com.rafael.consultorio_medico_actividad.dto.response.AppointmentDTOResponse;
 import com.rafael.consultorio_medico_actividad.entity.Appointment;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface AppointmentMapper {
 
+    @Mapping(target = "PatientDTOResponse", source = "patient", ignore = true)
     AppointmentDTOResponse toAppointmentDtoResponse(Appointment appointment);
 
     Appointment toAppointment(AppointmentRegisterDTORequest appointment);

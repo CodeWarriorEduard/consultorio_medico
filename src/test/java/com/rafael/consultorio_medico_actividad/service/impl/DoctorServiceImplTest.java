@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -104,7 +105,7 @@ class DoctorServiceImplTest {
     @Test
     void registerADoctor() {
 
-        DoctorRegisterDTORequest doctorRegisterDTORequest = new DoctorRegisterDTORequest("pollo1","pollo1@mail.com","nada xd", LocalDateTime.of(0,1,1,8,0),LocalDateTime.of(0,1,1,20,0));
+        DoctorRegisterDTORequest doctorRegisterDTORequest = new DoctorRegisterDTORequest("pollo1","pollo1@mail.com","nada xd", LocalTime.of(8,0),LocalTime.of(20,0));
 
         Doctor doctor = Doctor.builder()
                 .full_name("pollo1")
@@ -129,7 +130,7 @@ class DoctorServiceImplTest {
     @Test
     void updateDoctor() {
 
-        DoctorRegisterDTORequest doctorRegisterDTORequest = new DoctorRegisterDTORequest("pollo2","pollo1@mail.com","nada xd", LocalDateTime.of(0,1,1,8,0),LocalDateTime.of(0,1,1,20,0));
+        DoctorRegisterDTORequest doctorRegisterDTORequest = new DoctorRegisterDTORequest("pollo2","pollo1@mail.com","nada xd", LocalTime.of(8,0),LocalTime.of(20,0));
 
         Doctor doctor = Doctor.builder()
                 .full_name("pollo1")
@@ -155,7 +156,7 @@ class DoctorServiceImplTest {
     @Test
     void whenUpdateDoctorAndNotFoundThenThrowException() {
 
-        DoctorRegisterDTORequest doctorRegisterDTORequest = new DoctorRegisterDTORequest("pollo2","pollo1@mail.com","nada xd", LocalDateTime.of(0,1,1,8,0),LocalDateTime.of(0,1,1,20,0));
+        DoctorRegisterDTORequest doctorRegisterDTORequest = new DoctorRegisterDTORequest("pollo2","pollo1@mail.com","nada xd", LocalTime.of(8,0),LocalTime.of(20,0));
 
         when(doctorRepository.findById(any())).thenReturn(Optional.empty());
         assertThrows(DoctorNotFoundException.class, () -> doctorService.updateDoctor(1L,doctorRegisterDTORequest));

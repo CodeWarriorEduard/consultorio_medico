@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -25,9 +25,9 @@ public class Doctor {
 
     private String specialty;
 
-    private LocalDateTime avaliable_from;
+    private LocalTime avaliable_from;
 
-    private LocalDateTime avaliable_to;
+    private LocalTime avaliable_to;
 
     @OneToMany(mappedBy = "doctor")
     private List<Appointment> appointments;

@@ -3,6 +3,7 @@ package com.rafael.consultorio_medico_actividad.entity;
 import com.rafael.consultorio_medico_actividad.enumeration.AppointmentStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class Appointment {
 
     @Id
