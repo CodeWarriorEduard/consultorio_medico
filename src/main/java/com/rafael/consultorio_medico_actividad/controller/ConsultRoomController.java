@@ -2,7 +2,7 @@ package com.rafael.consultorio_medico_actividad.controller;
 
 import com.rafael.consultorio_medico_actividad.dto.request.ConsultRoomRegisterDTORequest;
 import com.rafael.consultorio_medico_actividad.dto.response.ConsultRoomDTOResponse;
-import com.rafael.consultorio_medico_actividad.service.ConsultRoomService;
+import com.rafael.consultorio_medico_actividad.service.interfaces.ConsultRoomService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

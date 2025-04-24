@@ -2,14 +2,12 @@ package com.rafael.consultorio_medico_actividad.service.impl;
 
 import com.rafael.consultorio_medico_actividad.dto.request.MedicalRecordRegisterDTORequest;
 import com.rafael.consultorio_medico_actividad.dto.response.MedicalRecordDTOResponse;
-import com.rafael.consultorio_medico_actividad.dto.update.MedicalRecordUpdateDTO;
-import com.rafael.consultorio_medico_actividad.entity.MedicalRecord;
 import com.rafael.consultorio_medico_actividad.exception.notFound.AppointMentNotFoundException;
 import com.rafael.consultorio_medico_actividad.exception.notFound.MedicalRecordNotFoundException;
 import com.rafael.consultorio_medico_actividad.mapper.MedicalRecordMapper;
 import com.rafael.consultorio_medico_actividad.repository.AppointmentRepository;
 import com.rafael.consultorio_medico_actividad.repository.MedicalRecordRepository;
-import com.rafael.consultorio_medico_actividad.service.MedicalRecordService;
+import com.rafael.consultorio_medico_actividad.service.interfaces.MedicalRecordService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

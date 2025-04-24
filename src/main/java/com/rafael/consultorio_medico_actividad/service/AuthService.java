@@ -1,22 +1,15 @@
 package com.rafael.consultorio_medico_actividad.service;
 
 import com.rafael.consultorio_medico_actividad.dto.request.UserLoginDTORequest;
-import com.rafael.consultorio_medico_actividad.dto.response.UserLoginDTOResponse;
-import com.rafael.consultorio_medico_actividad.entity.Roles;
 import com.rafael.consultorio_medico_actividad.entity.User;
-import com.rafael.consultorio_medico_actividad.enumeration.RolesEnum;
 import com.rafael.consultorio_medico_actividad.mapper.UserMapper;
 import com.rafael.consultorio_medico_actividad.repository.RolesRepository;
 import com.rafael.consultorio_medico_actividad.repository.UserRepository;
-import io.jsonwebtoken.Jwts;
-import jakarta.transaction.Transactional;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class AuthService {
@@ -54,11 +47,7 @@ public class AuthService {
                 )
         );
 
-        // Test
-
         String token = jwtService.getToken(user);
-
-        System.out.println("hola");
         return token;
     }
 

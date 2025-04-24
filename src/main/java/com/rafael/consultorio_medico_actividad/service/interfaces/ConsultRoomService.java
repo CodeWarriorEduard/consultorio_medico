@@ -1,4 +1,4 @@
-package com.rafael.consultorio_medico_actividad.service;
+package com.rafael.consultorio_medico_actividad.service.interfaces;
 
 import com.rafael.consultorio_medico_actividad.dto.request.ConsultRoomRegisterDTORequest;
 import com.rafael.consultorio_medico_actividad.dto.response.ConsultRoomDTOResponse;

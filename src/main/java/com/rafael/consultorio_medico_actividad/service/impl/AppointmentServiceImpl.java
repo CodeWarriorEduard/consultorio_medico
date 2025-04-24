@@ -18,7 +18,7 @@ import com.rafael.consultorio_medico_actividad.repository.AppointmentRepository;
 import com.rafael.consultorio_medico_actividad.repository.ConsultRoomRepository;
 import com.rafael.consultorio_medico_actividad.repository.DoctorRepository;
 import com.rafael.consultorio_medico_actividad.repository.PatientRepository;
-import com.rafael.consultorio_medico_actividad.service.AppointmentService;
+import com.rafael.consultorio_medico_actividad.service.interfaces.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -128,12 +128,4 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     }
 
-    @Override
-    public AppointmentDTOResponse updateAppointmentStatus(Long id, AppointmentStatus status) {
-        Appointment appointment = appointmentRepository.findById(id)
-                .orElseThrow(() -> new AppointMentNotFoundException("Appointment not found"));
-
-        appointment.setAppointmentStatus(status);
-        return appointmentMapper.toAppointmentDtoResponse(appointmentRepository.save(appointment));
-    }
 }

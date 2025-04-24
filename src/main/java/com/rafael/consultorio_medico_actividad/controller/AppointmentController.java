@@ -3,8 +3,7 @@ package com.rafael.consultorio_medico_actividad.controller;
 
 import com.rafael.consultorio_medico_actividad.dto.request.AppointmentRegisterDTORequest;
 import com.rafael.consultorio_medico_actividad.dto.response.AppointmentDTOResponse;
-import com.rafael.consultorio_medico_actividad.enumeration.AppointmentStatus;
-import com.rafael.consultorio_medico_actividad.service.AppointmentService;
+import com.rafael.consultorio_medico_actividad.service.interfaces.AppointmentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,9 +41,5 @@ public class AppointmentController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PatchMapping("/{id}/new-status")
-    public ResponseEntity<AppointmentDTOResponse> updateAppointmentStatus(@PathVariable Long id, @RequestBody AppointmentStatus status){
-        return new ResponseEntity<>(appointmentService.updateAppointmentStatus(id, status), HttpStatus.OK);
-    }
 
 }

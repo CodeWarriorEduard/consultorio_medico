@@ -14,7 +14,7 @@ import com.rafael.consultorio_medico_actividad.mapper.DoctorMapper;
 import com.rafael.consultorio_medico_actividad.repository.DoctorRepository;
 import com.rafael.consultorio_medico_actividad.repository.RolesRepository;
 import com.rafael.consultorio_medico_actividad.repository.UserRepository;
-import com.rafael.consultorio_medico_actividad.service.DoctorService;
+import com.rafael.consultorio_medico_actividad.service.interfaces.DoctorService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

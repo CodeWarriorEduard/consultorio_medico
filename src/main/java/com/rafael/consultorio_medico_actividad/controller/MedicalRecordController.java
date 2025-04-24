@@ -2,7 +2,7 @@ package com.rafael.consultorio_medico_actividad.controller;
 
 import com.rafael.consultorio_medico_actividad.dto.request.MedicalRecordRegisterDTORequest;
 import com.rafael.consultorio_medico_actividad.dto.response.MedicalRecordDTOResponse;
-import com.rafael.consultorio_medico_actividad.service.MedicalRecordService;
+import com.rafael.consultorio_medico_actividad.service.interfaces.MedicalRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

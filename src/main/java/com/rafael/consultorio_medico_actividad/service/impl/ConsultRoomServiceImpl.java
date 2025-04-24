@@ -6,7 +6,7 @@ import com.rafael.consultorio_medico_actividad.entity.ConsultRoom;
 import com.rafael.consultorio_medico_actividad.exception.notFound.ConsultRoomNotFoundException;
 import com.rafael.consultorio_medico_actividad.mapper.ConsultRoomMapper;
 import com.rafael.consultorio_medico_actividad.repository.ConsultRoomRepository;
-import com.rafael.consultorio_medico_actividad.service.ConsultRoomService;
+import com.rafael.consultorio_medico_actividad.service.interfaces.ConsultRoomService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
