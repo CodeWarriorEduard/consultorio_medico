@@ -1,8 +1,8 @@
 package com.rafael.consultorio_medico_actividad.service.impl;
 
-import com.rafael.consultorio_medico_actividad.dto.request.DoctorUpdateDTORequest;
 import com.rafael.consultorio_medico_actividad.dto.request.DoctorUserRegisterDTORequest;
 import com.rafael.consultorio_medico_actividad.dto.response.DoctorDTOResponse;
+import com.rafael.consultorio_medico_actividad.dto.update.DoctorUpdateDTORequest;
 import com.rafael.consultorio_medico_actividad.entity.Doctor;
 import com.rafael.consultorio_medico_actividad.entity.Roles;
 import com.rafael.consultorio_medico_actividad.entity.User;

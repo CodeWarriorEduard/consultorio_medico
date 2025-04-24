@@ -1,4 +1,4 @@
-package com.rafael.consultorio_medico_actividad.dto.request;
+package com.rafael.consultorio_medico_actividad.dto.update;
 
 import java.time.LocalDateTime;
 

@@ -1,8 +1,8 @@
 package com.rafael.consultorio_medico_actividad.controller;
 
-import com.rafael.consultorio_medico_actividad.dto.request.DoctorUpdateDTORequest;
 import com.rafael.consultorio_medico_actividad.dto.request.DoctorUserRegisterDTORequest;
 import com.rafael.consultorio_medico_actividad.dto.response.DoctorDTOResponse;
+import com.rafael.consultorio_medico_actividad.dto.update.DoctorUpdateDTORequest;
 import com.rafael.consultorio_medico_actividad.service.DoctorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
