@@ -41,7 +41,6 @@ public class MedicalRecordController {
         return new ResponseEntity<>(medicalRecordService.registerAMedicalRecord(medical_record), HttpStatus.OK);
     }
 
-
     @DeleteMapping("/{id}")
     public ResponseEntity<MedicalRecordDTOResponse> deleteMedicalRecord(@PathVariable Long id) {
         medicalRecordService.deleteMedicalRecord(id);

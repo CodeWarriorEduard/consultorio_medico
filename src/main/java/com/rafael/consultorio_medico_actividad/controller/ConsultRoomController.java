@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "${api.endpoint.global}"+"/consult-room")
+@RequestMapping(value = "${api.endpoint.global}"+"/consult-rooms")
 public class ConsultRoomController {
 
     private final ConsultRoomService consultRoomService;
@@ -18,7 +18,6 @@ public class ConsultRoomController {
     public ConsultRoomController(ConsultRoomService consultRoomService) {
         this.consultRoomService = consultRoomService;
     }
-
 
     @GetMapping("/all")
     private ResponseEntity<List<ConsultRoomDTOResponse>> getAllConsultRoooms() {
