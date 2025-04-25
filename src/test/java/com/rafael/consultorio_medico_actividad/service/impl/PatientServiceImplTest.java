@@ -40,8 +40,8 @@ class PatientServiceImplTest {
                 .full_name("pollo2")
                 .build();
 
-        PatientDTOResponse p1DTOResponse = new PatientDTOResponse(p1.getFull_name());
-        PatientDTOResponse p2DTOResponse = new PatientDTOResponse(p2.getFull_name());
+        PatientDTOResponse p1DTOResponse = new PatientDTOResponse(p1.getPatient_id(),p1.getFull_name(), p1.getEmail(), p1.getPhone());
+        PatientDTOResponse p2DTOResponse = new PatientDTOResponse(p1.getPatient_id(),p1.getFull_name(), p1.getEmail(), p1.getPhone());
 
         when(patientRepository.findAll()).thenReturn(List.of(p1, p2));
         when(patientMapper.toPatientDtoResponse(p1)).thenReturn(p1DTOResponse);
@@ -60,7 +60,7 @@ class PatientServiceImplTest {
                 .full_name("pollo1")
                 .build();
 
-        PatientDTOResponse p1DTOResponse = new PatientDTOResponse(p1.getFull_name());
+        PatientDTOResponse p1DTOResponse = new PatientDTOResponse(p1.getPatient_id(),p1.getFull_name(), p1.getEmail(), p1.getPhone());
 
         when(patientRepository.findById(1L)).thenReturn(Optional.of(p1));
         when(patientMapper.toPatientDtoResponse(p1)).thenReturn(p1DTOResponse);
@@ -87,7 +87,7 @@ class PatientServiceImplTest {
                 .build();
 
 
-        PatientDTOResponse p1DTOResponse = new PatientDTOResponse(p1.getFull_name());
+        PatientDTOResponse p1DTOResponse = new PatientDTOResponse(p1.getPatient_id(), p1.getFull_name(), p1.getEmail(), p1.getPhone());
 
         when(patientRepository.save(p1)).thenReturn(p1);
         when(patientMapper.toPatient(p1DTORequest)).thenReturn(p1);
@@ -108,7 +108,7 @@ class PatientServiceImplTest {
 
         PatientRegisterDTORequest p1DTORequest = new PatientRegisterDTORequest("pollo2",null,null);
 
-        PatientDTOResponse p1DTOUpdated = new PatientDTOResponse("pollo2");
+        PatientDTOResponse p1DTOUpdated = new PatientDTOResponse(1L ,"pollo2", "email@pollo.com","3049910300");
 
         when(patientRepository.findById(1L)).thenReturn(Optional.of(p1));
         p1.setFull_name("pollo2");

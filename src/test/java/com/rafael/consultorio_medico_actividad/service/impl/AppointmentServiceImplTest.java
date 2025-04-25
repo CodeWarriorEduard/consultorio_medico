@@ -59,7 +59,7 @@ class AppointmentServiceImplTest {
         Appointment ap1 = createTestAppointment(1L);
         Appointment ap2 = createTestAppointment(2L);
 
-        PatientDTOResponse patientDTOResponse = new PatientDTOResponse(ap1.getPatient().getFull_name());
+        PatientDTOResponse patientDTOResponse = new PatientDTOResponse(ap1.getPatient().getPatient_id(),ap1.getPatient().getFull_name(), ap1.getPatient().getEmail(), ap1.getPatient().getPhone());
 
         AppointmentDTOResponse ap1ResponseDTO = new AppointmentDTOResponse(ap1.getStart_time(),ap1.getEnd_time(), patientDTOResponse);
 
@@ -81,7 +81,7 @@ class AppointmentServiceImplTest {
     void getOneAppointment() {
         Appointment ap1 = createTestAppointment(1L);
 
-        PatientDTOResponse patientDTOResponse = new PatientDTOResponse(ap1.getPatient().getFull_name());
+        PatientDTOResponse patientDTOResponse = new PatientDTOResponse(ap1.getPatient().getPatient_id(),ap1.getPatient().getFull_name(), ap1.getPatient().getEmail(), ap1.getPatient().getPhone());
 
         AppointmentDTOResponse ap1ResponseDTO = new AppointmentDTOResponse(ap1.getStart_time(),ap1.getEnd_time(), patientDTOResponse);
 
@@ -122,7 +122,7 @@ class AppointmentServiceImplTest {
 
         AppointmentRegisterDTORequest ap1RequestDTO = new AppointmentRegisterDTORequest(ap1.getStart_time(),ap1.getEnd_time(),1L,1L,1L);
 
-        PatientDTOResponse patientDTOResponse = new PatientDTOResponse(ap1.getPatient().getFull_name());
+        PatientDTOResponse patientDTOResponse = new PatientDTOResponse(ap1.getPatient().getPatient_id(),ap1.getPatient().getFull_name(), ap1.getPatient().getEmail(), ap1.getPatient().getPhone());
 
         AppointmentDTOResponse ap1ResponseDTO = new AppointmentDTOResponse(ap1.getStart_time(),ap1.getEnd_time(), patientDTOResponse);
 
@@ -284,7 +284,7 @@ class AppointmentServiceImplTest {
 
         AppointmentDTOUpdate ap1UpdateDTO = new AppointmentDTOUpdate(ap1.getStart_time().plusMinutes(30),ap1.getEnd_time(), ap1.getAppointmentStatus());
 
-        PatientDTOResponse patientDTOResponse = new PatientDTOResponse(ap1.getPatient().getFull_name());
+        PatientDTOResponse patientDTOResponse = new PatientDTOResponse(ap1.getPatient().getPatient_id(),ap1.getPatient().getFull_name(), ap1.getPatient().getEmail(), ap1.getPatient().getPhone());
 
         AppointmentDTOResponse ap1ResponseDTO = new AppointmentDTOResponse(ap1.getStart_time(),ap1.getEnd_time(), patientDTOResponse);
 

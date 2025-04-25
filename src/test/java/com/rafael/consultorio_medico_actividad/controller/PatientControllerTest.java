@@ -44,7 +44,7 @@ class PatientControllerTest {
 
     @Test
     void shouldGetAllPatients() throws Exception {
-        when(patientService.getAllPatients()).thenReturn(List.of(new PatientDTOResponse("pollo1")));
+        when(patientService.getAllPatients()).thenReturn(List.of(new PatientDTOResponse(1L,"pollo1", "pollo@pollo.com", "123456")));
 
         mvc.perform(get("/api/v1/patients/all"))
                 .andExpect(status().isOk())
@@ -53,7 +53,7 @@ class PatientControllerTest {
 
     @Test
     void shouldGetPatientById() throws Exception {
-        PatientDTOResponse dtoResponse = new PatientDTOResponse("pollo1");
+        PatientDTOResponse dtoResponse = new PatientDTOResponse(1L,"pollo1", "pollo@pollo.com", "123456");
         when(patientService.getOnePatient(any())).thenReturn(dtoResponse);
         mvc.perform(get("/api/v1/patients/1"))
                 .andExpect(status().isOk())
@@ -63,7 +63,7 @@ class PatientControllerTest {
 
     @Test
     void shouldCreateAPatient() throws Exception {
-        PatientDTOResponse dtoResponse = new PatientDTOResponse("pollo1");
+        PatientDTOResponse dtoResponse = new PatientDTOResponse(1L,"pollo1", "pollo@pollo.com", "123456");
 
         when(patientService.registerAPatient(any())).thenReturn(dtoResponse);
 
@@ -77,7 +77,7 @@ class PatientControllerTest {
     @Test
     void shouldUpdateAPatient() throws Exception {
 
-        PatientDTOResponse dtoResponse = new PatientDTOResponse("pollo1");
+        PatientDTOResponse dtoResponse = new PatientDTOResponse(1L,"pollo1", "pollo@pollo.com", "123456");
 
         when(patientService.updateAPatient(1L, any())).thenReturn(dtoResponse);
 

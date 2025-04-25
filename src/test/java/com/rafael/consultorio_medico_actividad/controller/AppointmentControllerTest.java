@@ -44,7 +44,7 @@ class AppointmentControllerTest {
         when(appointmentService.findAllAppointments())
                 .thenReturn(List.of(new AppointmentDTOResponse(LocalDateTime.now().plusHours(1)
                         ,LocalDateTime.now().plusHours(2)
-                        ,new PatientDTOResponse("pollo1"))));
+                        ,new PatientDTOResponse(1L,"pollo1", "pollo@pollo.com", "123456"))));
 
         mvc.perform(get("/api/v1/appointments/all"))
                 .andExpect(status().isOk())
@@ -55,7 +55,7 @@ class AppointmentControllerTest {
     void shoulGetAppointmentById() throws Exception{
         AppointmentDTOResponse dtoResponse = new AppointmentDTOResponse(LocalDateTime.now().plusHours(1)
                 ,LocalDateTime.now().plusHours(2)
-                ,new PatientDTOResponse("pollo1"));
+                ,new PatientDTOResponse(1L,"pollo1", "pollo@pollo.com", "123456"));
 
         when(appointmentService.getOneAppointment(any())).thenReturn(dtoResponse);
 
@@ -68,7 +68,7 @@ class AppointmentControllerTest {
     void shouldCreateAppointment() throws Exception{
         AppointmentDTOResponse dtoResponse = new AppointmentDTOResponse(LocalDateTime.now().plusHours(1)
                 ,LocalDateTime.now().plusHours(2)
-                ,new PatientDTOResponse("pollo1"));
+                ,new PatientDTOResponse(1L,"pollo1", "pollo@pollo.com", "123456"));
 
         when(appointmentService.createAnAppointment(any())).thenReturn(dtoResponse);
         mvc.perform(put("/api/v1/appointments/new"))

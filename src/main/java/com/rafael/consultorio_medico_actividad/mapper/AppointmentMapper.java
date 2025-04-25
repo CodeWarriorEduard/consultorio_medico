@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface AppointmentMapper {
 
-    @Mapping(target = "patient", source = "patient", ignore = true)
+    @Mapping(target = "patient", source = "patient")
     AppointmentDTOResponse toAppointmentDtoResponse(Appointment appointment);
 
     Appointment toAppointment(AppointmentRegisterDTORequest appointment);
