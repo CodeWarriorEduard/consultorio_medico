@@ -3,6 +3,7 @@ package com.rafael.consultorio_medico_actividad.controller;
 import com.rafael.consultorio_medico_actividad.dto.request.MedicalRecordRegisterDTORequest;
 import com.rafael.consultorio_medico_actividad.dto.response.MedicalRecordDTOResponse;
 import com.rafael.consultorio_medico_actividad.service.interfaces.MedicalRecordService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,7 @@ public class MedicalRecordController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<MedicalRecordDTOResponse> createMedicalRecord(@RequestBody MedicalRecordRegisterDTORequest medical_record) {
+    public ResponseEntity<MedicalRecordDTOResponse> createMedicalRecord(@Valid @RequestBody MedicalRecordRegisterDTORequest medical_record) {
         return new ResponseEntity<>(medicalRecordService.registerAMedicalRecord(medical_record), HttpStatus.OK);
     }
 

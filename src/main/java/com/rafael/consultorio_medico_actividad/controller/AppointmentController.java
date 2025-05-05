@@ -3,7 +3,9 @@ package com.rafael.consultorio_medico_actividad.controller;
 
 import com.rafael.consultorio_medico_actividad.dto.request.AppointmentRegisterDTORequest;
 import com.rafael.consultorio_medico_actividad.dto.response.AppointmentDTOResponse;
+import com.rafael.consultorio_medico_actividad.dto.update.AppointmentDTOUpdate;
 import com.rafael.consultorio_medico_actividad.service.interfaces.AppointmentService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +33,13 @@ public class AppointmentController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<AppointmentDTOResponse> createAppointment(@RequestBody AppointmentRegisterDTORequest apppointment){
+    public ResponseEntity<AppointmentDTOResponse> createAppointment(@Valid  @RequestBody AppointmentRegisterDTORequest apppointment){
         return new ResponseEntity<>(appointmentService.createAnAppointment(apppointment), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{appo_id}")
+    public ResponseEntity<AppointmentDTOResponse> updateAppointment(@Valid @PathVariable Long appo_id, @RequestBody AppointmentDTOUpdate apppointment){
+        return new ResponseEntity<>(appointmentService.updateAppointment(appo_id, apppointment), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

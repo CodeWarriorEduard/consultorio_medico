@@ -3,6 +3,7 @@ package com.rafael.consultorio_medico_actividad.controller;
 import com.rafael.consultorio_medico_actividad.dto.request.ConsultRoomRegisterDTORequest;
 import com.rafael.consultorio_medico_actividad.dto.response.ConsultRoomDTOResponse;
 import com.rafael.consultorio_medico_actividad.service.interfaces.ConsultRoomService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,12 +31,12 @@ public class ConsultRoomController {
     }
 
     @PostMapping("/new")
-    private ResponseEntity<ConsultRoomDTOResponse> registerAConsultRoom(@RequestBody ConsultRoomRegisterDTORequest consult_room) {
+    private ResponseEntity<ConsultRoomDTOResponse> registerAConsultRoom(@Valid  @RequestBody ConsultRoomRegisterDTORequest consult_room) {
         return new ResponseEntity<>(consultRoomService.registerAConsultRoom(consult_room), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    private ResponseEntity<ConsultRoomDTOResponse> updateAConsultRoom(@PathVariable  Long id, @RequestBody ConsultRoomRegisterDTORequest consult_room) {
+    private ResponseEntity<ConsultRoomDTOResponse> updateAConsultRoom(@Valid @PathVariable  Long id, @RequestBody ConsultRoomRegisterDTORequest consult_room) {
         return new ResponseEntity<>(consultRoomService.updateConsultRoom(id, consult_room), HttpStatus.OK);
     }
 
