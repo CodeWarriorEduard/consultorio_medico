@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 public class ConsultRoom {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long consult_room_id;
 
     private String name;

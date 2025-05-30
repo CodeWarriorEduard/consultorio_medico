@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "${api.endpoint.global}"+"/consult-rooms")
+@RequestMapping(value = "/consult-rooms")
 public class ConsultRoomController {
 
     private final ConsultRoomService consultRoomService;

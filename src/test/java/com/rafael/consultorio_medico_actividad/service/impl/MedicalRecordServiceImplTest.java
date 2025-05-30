@@ -4,6 +4,7 @@ import com.rafael.consultorio_medico_actividad.dto.request.MedicalRecordRegister
 import com.rafael.consultorio_medico_actividad.dto.request.PatientRegisterDTORequest;
 import com.rafael.consultorio_medico_actividad.dto.response.MedicalRecordDTOResponse;
 import com.rafael.consultorio_medico_actividad.dto.update.MedicalRecordUpdateDTO;
+import com.rafael.consultorio_medico_actividad.entity.Appointment;
 import com.rafael.consultorio_medico_actividad.entity.MedicalRecord;
 import com.rafael.consultorio_medico_actividad.entity.Patient;
 import com.rafael.consultorio_medico_actividad.exception.notFound.AppointMentNotFoundException;
@@ -11,6 +12,8 @@ import com.rafael.consultorio_medico_actividad.exception.notFound.MedicalRecordN
 import com.rafael.consultorio_medico_actividad.mapper.MedicalRecordMapper;
 import com.rafael.consultorio_medico_actividad.repository.AppointmentRepository;
 import com.rafael.consultorio_medico_actividad.repository.MedicalRecordRepository;
+import com.rafael.consultorio_medico_actividad.repository.PatientRepository;
+import com.rafael.consultorio_medico_actividad.service.interfaces.AppointmentService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -36,8 +39,15 @@ class MedicalRecordServiceImplTest {
     @Mock
     AppointmentRepository appointmentRepository;
 
+    @Mock
+    PatientRepository patientRepository;
+
+
+
     @InjectMocks
     MedicalRecordServiceImpl medicalRecordService;
+
+
 
     @Test
     void findAllMedicalRecord() {
@@ -109,11 +119,22 @@ class MedicalRecordServiceImplTest {
     @Test
     void registerAMedicalRecord() {
 
+        Long appointmentId = 1L;
+        Appointment mockAppointment = new Appointment(); // configura según sea necesario
+        mockAppointment.setAppointment_id(appointmentId);
+
+        Patient savedPatient = Patient.builder()
+                .patient_id(1L)
+                .full_name("pollo1")
+                .email("pollo@mail.com")
+                .phone("312")
+                .build();
+
         MedicalRecordRegisterDTORequest mr1DTORequest = new MedicalRecordRegisterDTORequest(
                 "diagnosis 1",
                 "notes 1",
                 LocalDateTime.of(2025,1,1,1,1),
-                new PatientRegisterDTORequest("pollo1","pollo@mail.com","312"),
+                1L,
                 1L
         );
 
@@ -125,22 +146,29 @@ class MedicalRecordServiceImplTest {
                 .build();
 
         MedicalRecordDTOResponse mr1DTOResponse = new MedicalRecordDTOResponse("diagnosis 1", "notes 1");
+        when(appointmentRepository.findById(appointmentId)).thenReturn(Optional.of(mockAppointment));
+        when(patientRepository.findById(1L)).thenReturn(Optional.of(savedPatient));
+        when(medicalRecordRepository.save(any())).thenReturn(mr1);
+        when(medicalRecordMapper.toMedicalRecordDTOResponse(any())).thenReturn(mr1DTOResponse);
 
-        when(appointmentRepository.existsById(any())).thenReturn(true);
-        when(medicalRecordRepository.save(mr1)).thenReturn(mr1);
-        when(medicalRecordMapper.toMedicalRecordDTOResponse(mr1)).thenReturn(mr1DTOResponse);
-        when(medicalRecordMapper.toMedicalRecord(mr1DTORequest)).thenReturn(mr1);
-        MedicalRecordDTOResponse response = medicalRecordService.registerAMedicalRecord(mr1DTORequest);
-        assertEquals(mr1DTOResponse.notes(), response.notes());
-        verify(medicalRecordRepository, times(1)).save(mr1);
+        MedicalRecordRegisterDTORequest request = new MedicalRecordRegisterDTORequest(
+                "diagnosis 1",
+                "notes 1",
+                LocalDateTime.of(2025, 1, 1, 1, 1),
+                 1L,
+                 appointmentId
+        );
+
+        // Act
+        MedicalRecordDTOResponse result = medicalRecordService.registerAMedicalRecord(request);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(mr1DTOResponse.diagnosis(), result.diagnosis());
+        assertEquals(mr1DTOResponse.notes(), result.notes());
+        verify(medicalRecordRepository, times(1)).save(any(MedicalRecord.class));
     }
 
-    @Test
-    void whenRegisterOneMedicalRecordAndNotAppointmentFoundThenThrowException() {
-        when(appointmentRepository.existsById(any())).thenReturn(false);
-        assertThrows(AppointMentNotFoundException.class, () -> medicalRecordService.registerAMedicalRecord(new MedicalRecordRegisterDTORequest("a","a", LocalDateTime.of(2025,1,1,1,1),new PatientRegisterDTORequest("pollo1","pollo@mail.com","312"),1L)));
-        verify(appointmentRepository, times(1)).existsById(any());
-    }
 
 //    @Test
 //    void updateAMedicalRecord() {

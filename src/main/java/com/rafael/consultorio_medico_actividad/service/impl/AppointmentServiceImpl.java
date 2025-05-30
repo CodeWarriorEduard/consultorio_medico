@@ -85,7 +85,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         if (appointment.start_time().isBefore(LocalDateTime.now().plusHours(1)) || appointment.end_time().isBefore(appointment.start_time())) {
             throw new TimeConflictException("Appointment time is wrong");
         }
-
+        System.out.println(consultRoom.getConsult_room_id());
         List<Appointment> conflicts = appointmentRepository.findConflict(consultRoom.getConsult_room_id(), appointment.start_time(), appointment.end_time());
 
         if (!conflicts.isEmpty()) {

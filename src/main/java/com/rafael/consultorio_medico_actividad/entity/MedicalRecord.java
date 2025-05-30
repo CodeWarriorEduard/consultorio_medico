@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class MedicalRecord {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long medical_record_id;
 
     private String diagnosis;

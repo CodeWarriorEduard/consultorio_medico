@@ -20,7 +20,7 @@ public record MedicalRecordRegisterDTORequest(
 
         @NotNull(message = "Patient cannot be null")
         @Valid
-        PatientRegisterDTORequest patient,
+        Long patient_id,
 
         @NotNull(message = "Appointment ID cannot be null")
         Long appointment_id) {

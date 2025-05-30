@@ -19,7 +19,7 @@ import java.util.List;
 
 public class Doctor{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long doctor_id;
 
     // Doctor will be an user, so we remove them and let the user entity provide them.

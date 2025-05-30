@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Roles {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long role_id;
 
     private RolesEnum role;
